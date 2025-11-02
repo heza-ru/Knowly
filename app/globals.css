@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+/* Momo Signature Font - fallback to local font if available */
+@font-face {
+  font-family: 'Momo Signature';
+  src: url('/fonts/MomoSignature.woff2') format('woff2'),
+       url('/fonts/MomoSignature.woff') format('woff'),
+       url('/fonts/MomoSignature.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-hindi: 'Noto Sans Devanagari', sans-serif;
+  --font-cursive: 'Kalam', cursive;
+  --font-signature: 'Great Vibes', 'Momo Signature', cursive;
+  
+  /* Default theme colors */
+  --theme-bg: #0f0f0f;
+  --theme-surface: #1a1a1a;
+  --theme-surface-hover: #252525;
+  --theme-border: #2a2a2a;
+  --theme-text: #f5f5f5;
+  --theme-text-muted: #a0a0a0;
+  --theme-primary: #3b82f6;
+  --theme-success: #10b981;
+  --theme-error: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+body {
+  min-height: 100vh;
+}
+
+.font-hindi {
+  font-family: var(--font-hindi);
+}
+
+.font-cursive {
+  font-family: var(--font-cursive);
+}
+
+.font-signature {
+  font-family: var(--font-signature);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-text-muted);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 2px;
+}
+
+/* Mobile-first: tap targets should be at least 44x44px */
+button,
+a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* 3D Text Effects - Simple Text Shadow */
+.title-3d {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 
+    2px 2px 0px rgba(0, 0, 0, 0.8),
+    4px 4px 0px rgba(0, 0, 0, 0.6),
+    6px 6px 0px rgba(0, 0, 0, 0.4),
+    8px 8px 0px rgba(0, 0, 0, 0.2),
+    10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Fluid animations */
+.animate-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth spring animations */
+.spring-bounce {
+  animation: springBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes springBounce {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
