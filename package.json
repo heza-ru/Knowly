@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "netlify:build": "next build"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@netlify/plugin-nextjs": "^5.14.4",
+    "@types/minimatch": "^6.0.0",
     "@types/node": "^24.9.2",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.2.2",

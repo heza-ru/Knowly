@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Home, RotateCcw, CheckCircle2, XCircle } from 'lucide-react';
@@ -44,7 +44,7 @@ const translations = {
   },
 };
 
-export default function ReviewPage() {
+function ReviewContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { settings } = useSettings();
@@ -224,5 +224,19 @@ export default function ReviewPage() {
         </div>
       </div>
     </AnimatedPageWrapper>
+  );
+}
+
+export default function ReviewPage() {
+  return (
+    <Suspense fallback={
+      <AnimatedPageWrapper>
+        <div className="min-h-screen flex items-center justify-center bg-[var(--theme-bg)]">
+          <p className="text-[var(--theme-text-muted)] font-hindi">Loading...</p>
+        </div>
+      </AnimatedPageWrapper>
+    }>
+      <ReviewContent />
+    </Suspense>
   );
 }

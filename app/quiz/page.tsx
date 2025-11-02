@@ -27,6 +27,7 @@ const translations = {
     exitConfirm: 'Are you sure you want to exit? Your progress will be saved.',
     exit: 'Exit',
     cancel: 'Cancel',
+    back: 'Back',
   },
   hindi: {
     modeStandard: 'स्टैंडर्ड मोड',
@@ -40,6 +41,7 @@ const translations = {
     exitConfirm: 'क्या आप निश्चित रूप से बाहर निकलना चाहते हैं? आपकी प्रगति सहेजी जाएगी।',
     exit: 'बाहर निकलें',
     cancel: 'रद्द करें',
+    back: 'वापस',
   },
 };
 
@@ -190,6 +192,11 @@ export default function QuizPage() {
     'review': '',
   };
 
+  const getModeLabel = (mode: any): string => {
+    const quizMode = mode as QuizMode;
+    return modeLabels[quizMode] || t.modeStandard;
+  };
+
   if (isLoading) {
     return (
       <AnimatedPageWrapper>
@@ -241,7 +248,7 @@ export default function QuizPage() {
               </button>
               <div>
                 <div className="text-sm text-[var(--theme-text-muted)] font-hindi">
-                  {modeLabels[modeData?.mode || 'standard']}
+                  {getModeLabel(modeData?.mode || 'standard')}
                 </div>
                 <div className="font-semibold text-[var(--theme-text)] font-hindi">
                   {paperData?.name || ''}
