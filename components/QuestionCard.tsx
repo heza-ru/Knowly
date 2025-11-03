@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Question } from '@/lib/types';
 import { useSettings } from '@/hooks/useSettings';
 import { useState } from 'react';
+import { useSound } from '@/hooks/useSound';
 
 interface QuestionCardProps {
   question: Question;
@@ -26,6 +27,7 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const { settings } = useSettings();
   const [hoveredOption, setHoveredOption] = useState<'A' | 'B' | 'C' | 'D' | null>(null);
+  const { playSound } = useSound();
 
   // Determine which language to use - map to app language in auto mode
   const getQuestionText = () => {
@@ -146,7 +148,7 @@ export function QuestionCard({
           damping: 20
         }
       }}
-      className="bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-2xl p-6 shadow-lg"
+      className="question-card bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-2xl p-4 sm:p-6 shadow-lg"
     >
       {question.Context_Passage && (
         <div className={`mb-4 p-4 rounded-lg bg-[var(--theme-surface-hover)] border border-[var(--theme-border)] ${fontSizeClass} text-[var(--theme-text-muted)] leading-relaxed`}>
@@ -168,7 +170,7 @@ export function QuestionCard({
         </h2>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 sm:space-y-4">
         {options.map((option) => {
           const optionText = getOptionText(option);
           // Show option even if text is empty (might be language-specific question)
@@ -184,34 +186,37 @@ export function QuestionCard({
           return (
             <motion.button
               key={option}
-              onClick={() => onSelect(option)}
+              onClick={() => {
+                playSound('select');
+                onSelect(option);
+              }}
               onMouseEnter={() => setHoveredOption(option)}
               onMouseLeave={() => setHoveredOption(null)}
               disabled={showResult}
-              className={`w-full p-4 rounded-lg border-2 text-left transition-all ${getOptionStyle(option)} ${fontSizeClass} font-hindi disabled:cursor-not-allowed`}
+              className={`option-btn w-full p-3 sm:p-4 rounded-lg border-2 text-left transition-all ${getOptionStyle(option)} ${fontSizeClass} font-hindi disabled:cursor-not-allowed`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ 
-                delay: options.indexOf(option) * 0.1,
+                delay: options.indexOf(option) * 0.05,
                 type: "spring",
-                stiffness: 100,
-                damping: 15
+                stiffness: 500,
+                damping: 24
               }}
               whileHover={!showResult ? { 
-                scale: 1.03,
-                x: 5,
+                scale: 1.04,
+                x: 4,
                 transition: { 
                   type: "spring",
-                  stiffness: 400,
-                  damping: 25
+                  stiffness: 700,
+                  damping: 22
                 }
               } : {}}
               whileTap={!showResult ? { 
-                scale: 0.97,
+                scale: 0.96,
                 transition: { 
                   type: "spring",
-                  stiffness: 400,
-                  damping: 25
+                  stiffness: 800,
+                  damping: 26
                 }
               } : {}}
             >

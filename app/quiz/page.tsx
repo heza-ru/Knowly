@@ -234,8 +234,8 @@ export default function QuizPage() {
 
   return (
     <AnimatedPageWrapper>
-      <div className="min-h-screen p-4 sm:p-6 bg-[var(--theme-bg)]">
-        <div className="max-w-4xl mx-auto">
+      <div className="quiz-screen min-h-[100svh] p-3 sm:p-6 bg-[var(--theme-bg)]">
+        <div className="max-w-4xl mx-auto flex flex-col min-h-[calc(100svh-0rem)]">
           {/* Header */}
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -322,6 +322,7 @@ export default function QuizPage() {
           </AnimatePresence>
 
           {/* Question Card */}
+          <div className="flex-1 overflow-y-auto pb-24 sm:pb-28 -mx-1 px-1">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuestion.Question_Number}
@@ -346,14 +347,17 @@ export default function QuizPage() {
               />
             </motion.div>
           </AnimatePresence>
+          </div>
 
           {/* Navigation Buttons */}
-          <motion.div 
-            className="mt-6 flex flex-col sm:flex-row gap-4"
+          {/* Fixed bottom controls */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+            className="controls fixed left-0 right-0 bottom-0 z-40 bg-[var(--theme-bg)]/85 backdrop-blur border-t border-[var(--theme-border)] pb-safe"
           >
+            <div className="max-w-4xl mx-auto px-3 sm:px-6 pt-2 pb-3 sm:pb-4 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <motion.button
               onClick={goToPrevious}
               disabled={!canGoPrevious()}
@@ -427,25 +431,7 @@ export default function QuizPage() {
                 t.submit
               )}
             </motion.button>
-            {!canGoNext() && answers.length > 0 && (
-              <motion.button
-                onClick={handleFinish}
-                className="px-6 py-3 rounded-lg bg-[var(--theme-success)] hover:bg-[var(--theme-success)]/90 text-white font-semibold font-hindi"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { type: "spring", stiffness: 400, damping: 25 }
-                }}
-                whileTap={{ 
-                  scale: 0.95,
-                  transition: { type: "spring", stiffness: 400, damping: 25 }
-                }}
-              >
-                {t.finish}
-              </motion.button>
-            )}
+            </div>
           </motion.div>
         </div>
 

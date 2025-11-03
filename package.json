@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
+    "howler": "^2.2.4",
     "lucide-react": "^0.552.0",
     "next": "^16.0.1",
     "next-pwa": "^5.6.0",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@netlify/plugin-nextjs": "^5.14.4",
+    "@types/howler": "^2.2.12",
     "@types/minimatch": "^6.0.0",
     "@types/node": "^24.9.2",
     "@types/papaparse": "^5.3.16",

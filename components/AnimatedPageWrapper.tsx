@@ -8,20 +8,20 @@ interface AnimatedPageWrapperProps {
 }
 
 const pageVariants = {
-  initial: { opacity: 0, y: 20, scale: 0.98 },
+  initial: { opacity: 0, y: 18, scale: 0.985 },
   animate: { 
     opacity: 1, 
     y: 0, 
     scale: 1,
   },
-  exit: { opacity: 0, y: -20, scale: 0.98 },
+  exit: { opacity: 0, y: -16, scale: 0.985 },
 };
 
 const pageTransition = {
   type: 'spring' as const,
-  stiffness: 100,
-  damping: 20,
-  mass: 0.5,
+  stiffness: 260,
+  damping: 24,
+  mass: 0.45,
 };
 
 export function AnimatedPageWrapper({ children }: AnimatedPageWrapperProps) {
